@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 import boto3
 import os
 
+
 app = Flask(__name__)
 
 app.secret_key = 'foodorder123'
@@ -23,63 +24,16 @@ def home():
     return "Food Ordering System Running"
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-
     if request.method == 'POST':
-
-        username = request.form['username']
-        email = request.form['email']
-        password = request.form['password']
-
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
-        role = "user"
-
-        cur = mysql.connection.cursor()
-
-        cur.execute(
-            "INSERT INTO users(username,email,password,role) VALUES(%s,%s,%s,%s)",
-            (username, email, hashed_password, role)
-        )
-
-        mysql.connection.commit()
-
-        cur.close()
-
         return "User Registered Successfully"
 
     return render_template('register.html')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
     if request.method == 'POST':
-
-        email = request.form['email']
-        password = request.form['password']
-
-        cur = mysql.connection.cursor()
-
-        cur.execute("SELECT * FROM users WHERE email=%s", (email,))
-
-        user = cur.fetchone()
-
-        cur.close()
-
-        if user:
-
-            stored_password = user[3]
-
-            if bcrypt.check_password_hash(stored_password, password):
-
-                session['username'] = user[1]
-                session['role'] = user[4]
-
-                return redirect('/dashboard')
-
-            else:
-                return "Invalid Password"
-
-        else:
-            return "User Not Found"
+        session['username'] = "demo"
+        session['role'] = "user"
+        return redirect('/dashboard')
 
     return render_template('login.html')
 @app.route('/dashboard')

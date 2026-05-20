@@ -5,7 +5,7 @@ import boto3
 
 app = Flask(__name__)
 
-app.secret_key = 'secret123'
+app.secret_key = 'foodorder123'
 
 # MySQL Configuration
 app.config['MYSQL_HOST'] = 'localhost'
@@ -14,9 +14,6 @@ app.config['MYSQL_PASSWORD'] = '1234'
 app.config['MYSQL_DB'] = 'foodapp'
 
 mysql = MySQL(app)
-s3 = boto3.client(
-    's3',
-)
 
 bcrypt = Bcrypt(app)
 

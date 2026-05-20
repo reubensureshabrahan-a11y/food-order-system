@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Cart</title>
+</head>
+<body>
+<h1>Your Cart</h1>
+{% for item in cart %}
+<p>
+    {{ item.food_name }} - ₹{{ item.price }}
+    <a href="/removefromcart/{{ loop.index0 }}">Remove</a>
+</p>
+{% endfor %}
+<a href="/placeorder">Place Order</a>
+</body>
+</html>

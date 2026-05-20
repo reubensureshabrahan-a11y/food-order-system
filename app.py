@@ -16,8 +16,6 @@ app.config['MYSQL_DB'] = 'foodapp'
 mysql = MySQL(app)
 s3 = boto3.client(
     's3',
-    aws_access_key_id='AKIARAT4CKC3OMS7SQAS',
-    aws_secret_access_key='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'
 )
 
 bcrypt = Bcrypt(app)
